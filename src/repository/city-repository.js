@@ -1,4 +1,4 @@
-const {City} = require('../models/index');
+const { City } = require('../models/index');
 
 
 class CityRepository {
@@ -6,7 +6,7 @@ class CityRepository {
     async createCity({name}) {
         try {
             const city = await City.create({
-                name
+                name: name
             });
             return city;
         } catch (error) {
@@ -31,11 +31,20 @@ class CityRepository {
 
     async updateCity(cityId , data) {
         try {
-            const city = await City.update(data ,  {
-                where : {
-                    id: cityId
-                }
-            });
+
+            //The below approach also works well but will not return updated object
+            //if we are using pgsql then returning:true can be used.
+            // const city = await City.update(data ,  {
+            //     where : {
+            //         id: cityId
+            //     }
+            // });
+            // return city;
+
+            //for returning updated value as well in mysql below approach
+            const city = await City.findByPk(cityId);
+            city.name = data.name;
+            await city.save();
             return city;
         } catch (error) {
             console.log("something went wrong at repository layer");

@@ -1,4 +1,4 @@
-const {CityService} = require('../controllers/city-controller');
+const {CityService} = require('../services/index');
 
 const cityService = new CityService();
 
@@ -14,7 +14,7 @@ const create = async (req , res) => {
 
     } catch (error) {
         console.log(error);
-        return res.send(500).json({
+        return res.status(500).json({
             data: {},
             success: false,
             message: 'Not able to create a city',
@@ -78,7 +78,7 @@ const update = async (req , res) => {
         });
     } catch (error) {
         console.log(error);
-        return res.send(500).json({
+        return res.status(500).json({
             data: {},
             success: false,
             message: 'Not able to update a city',
