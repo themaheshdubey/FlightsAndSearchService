@@ -17,6 +17,7 @@ const setupAndStartServer = async () => {
     app.use('/api' , ApiRoutes);
 
     app.listen(PORT , async () => {
+        console.log("mahesh");
         console.log(`server is running on port ${PORT}`);
 
         if(process.env.SYNC_DB) {
