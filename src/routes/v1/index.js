@@ -13,5 +13,7 @@ router.patch('/city/:id' , CityController.update);
 
 
 router.post('/flights' , FlightController.create);//creates a new flight
+router.get('/flights/:id' , FlightController.getFlight);//fetch a flight
+router.get('/flights' , FlightController.getAllFlight);//fetch all flight according to filter
 
 module.exports = router;
