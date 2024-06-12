@@ -1,4 +1,6 @@
 const {FlightService} = require('../services/index');
+const { SuccessCodes } = require('../utils/error-codes');
+
 
 const flightService = new FlightService();
 
@@ -16,7 +18,7 @@ const create = async(req,res) => {
         }//to avoid bulky req body send from client, dont pass unwanted data further to repo or service layer
 
        const response =  await flightService.createFlight(flightRequestData);
-       return res.status(201).json({
+       return res.status(SuccessCodes.CREATED).json({
         data:response,
         success:true,
         err:{},
@@ -36,7 +38,7 @@ const create = async(req,res) => {
 const getFlight = async(req , res) => {
     try {
         const response = await flightService.getFlight(req.params.id);
-        return res.status(200).json({
+        return res.status(SuccessCodes.OK).json({
             data:response,
             success:true,
             err:{},
@@ -56,7 +58,7 @@ const getFlight = async(req , res) => {
 const getAllFlight = async(req , res) => {
     try {
         const response = await flightService.getAllFlight(req.query);
-        return res.status(200).json({
+        return res.status(SuccessCodes.OK).json({
             data:response,
             success:true,
             err:{},
